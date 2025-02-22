@@ -1,5 +1,7 @@
 package br.edu.ifsp.testing.class02.exercises;
 
+import java.util.Scanner;
+
 public class Chocolate {
     public int calculateTotalOfChocolates(double n, double c, int m){
         if (c > n){
@@ -14,4 +16,16 @@ public class Chocolate {
             return r;
         }
     }
+
+    public static void main(String[] args) {
+        final Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int c = scanner.nextInt();
+        int m = scanner.nextInt();
+        scanner.close();
+        final int result = new Chocolate().calculateTotalOfChocolates(n, c, m);
+        System.out.println(result);
+    }
 }
+
+
