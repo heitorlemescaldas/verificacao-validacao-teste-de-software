@@ -1,10 +1,8 @@
 package br.edu.ifsp.testing.class09.security.user;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.websocket.OnOpen;
+import lombok.*;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -24,10 +22,15 @@ import java.util.UUID;
 public class User implements UserDetails {
     @Id
     @JdbcTypeCode(Types.VARCHAR)
+    @NonNull @Column(nullable = false)
     private UUID id;
+    @NonNull @Column(nullable = false)
     private String name;
+    @NonNull @Column(nullable = false)
     private String lastname;
+    @NonNull @Column(nullable = false)
     private String email;
+    @NonNull @Column(nullable = false)
     private String password;
 
     @Enumerated(EnumType.STRING)

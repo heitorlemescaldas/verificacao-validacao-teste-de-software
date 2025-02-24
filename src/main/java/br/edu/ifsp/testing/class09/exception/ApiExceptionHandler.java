@@ -14,6 +14,18 @@ import static org.springframework.http.HttpStatus.*;
 @ControllerAdvice
 public class ApiExceptionHandler {
 
+    @ExceptionHandler(value = NullPointerException.class)
+    public ResponseEntity<?> handleNullPointerException(NullPointerException e){
+        final HttpStatus badRequest = BAD_REQUEST;
+        final ApiException apiException = ApiException.builder()
+                .status(badRequest)
+                .message(e.getMessage())
+                .developerMessage(e.getClass().getName())
+                .timestamp(ZonedDateTime.now(ZoneId.of("Z")))
+                .build();
+        return new ResponseEntity<>(apiException, badRequest);
+    }
+
     @ExceptionHandler(value = IllegalArgumentException.class)
     public ResponseEntity<?> handleIllegalArgumentException(IllegalArgumentException e){
         final HttpStatus badRequest = BAD_REQUEST;
