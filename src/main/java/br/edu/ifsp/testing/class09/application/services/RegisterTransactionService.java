@@ -5,7 +5,7 @@ import br.edu.ifsp.testing.class09.application.dtos.RegisterTransactionResponse;
 import br.edu.ifsp.testing.class09.domain.Transaction;
 import br.edu.ifsp.testing.class09.security.auth.AuthenticationInfoService;
 import br.edu.ifsp.testing.class09.security.user.User;
-import br.edu.ifsp.testing.class09.security.user.UserRepository;
+import br.edu.ifsp.testing.class09.security.user.JpaUserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,7 +18,7 @@ public class RegisterTransactionService {
 
     private final AuthenticationInfoService authInfoService;
     private final TransactionRepository transactionRepository;
-    private final UserRepository userRepository;
+    private final JpaUserRepository userRepository;
 
     public RegisterTransactionResponse register(RegisterTransactionRequest request) {
         final UUID transactionId = UUID.randomUUID();

@@ -8,7 +8,7 @@ public class TestableXmasDiscount {
 
     public TestableXmasDiscount() { this(LocalDate.now()); } // The default implementation requires no configuration.
 
-    protected TestableXmasDiscount(LocalDate today){ // This constructor can not be used invoked the package.
+    TestableXmasDiscount(LocalDate today){ // This constructor can not be used invoked the package.
         this.today = today;
     }
 

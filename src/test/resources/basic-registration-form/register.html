@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link href="style.css" rel=" stylesheet">
+    <script src="register.js"></script>
+    <title>Cadastro</title>
+</head>
+<body>
+<form name="register-form" onsubmit="return false;">
+    <div class="container">
+        <h1>Cadastrar</h1>
+        <p>Preencha as informações a seguir para se cadastrar.</p>
+        <hr>
+
+        <label for="name" id="lb-name"><b>Nome <span class='error' id="name-err"></span></b></label>
+        <input id="name" name="name" placeholder="Digite nome completo" type="text">
+
+        <label for="email"><b>E-mail <span class='error' id="email-err"></span></b></label>
+        <input id="email" name="email" placeholder="Digite seu e-mail" type="text">
+
+        <!--<label for="birth"><b>Ano de Nascimento<span class='error' id="birth-err"></span></b></label>
+        <select name="birthdate" id="birth">
+            <option selected="selected" id="non_multi_option"></option>
+            <option value="2004">2004</option>
+            <option value="2003">2003</option>
+            <option value="2002">2002</option>
+            <option value="2001">2001</option>
+        </select>-->
+
+        <label for="psw"><b>Senha <span class='error' id="psw-err"></span></b></label>
+        <input id="psw" name="psw" placeholder="Digite uma senha" type="password">
+
+        <label for="psw-repeat"><b>Confirmação de Senha <span class='error' id="psw-repeat-err"></span></b></label>
+        <input id="psw-repeat" name="psw-repeat" placeholder="Digite a confirmação de sua senha" type="password">
+        <hr>
+
+        <button class="registerbtn" id="btn-submit" onClick="submitform()" type="submit">Cadastrar</button>
+    </div>
+    <div class="container signin">
+        <p>Já possui uma conta? <a href="authenticate.html">Fazer login</a>.</p>
+    </div>
+</form>
+</body>
+</html>

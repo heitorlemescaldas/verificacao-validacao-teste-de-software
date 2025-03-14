@@ -24,7 +24,7 @@ public interface JpaTransactionRepository extends JpaRepository<TransactionEntit
     AND (:begin IS NULL OR transactions.date >= :begin)
     AND (:end IS NULL OR transactions.date <= :end)
     """, nativeQuery = true)
-    List<TransactionEntity> findByUserIdAndDateRange(
+    List<TransactionEntity> findByUserIdAndDateRange(//...
             @Param("userId") String userId,
             @Param("begin") LocalDate begin,
             @Param("end") LocalDate end

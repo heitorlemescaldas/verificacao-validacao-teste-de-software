@@ -4,7 +4,7 @@ import br.edu.ifsp.testing.class09.exception.EntityAlreadyExistsException;
 import br.edu.ifsp.testing.class09.security.config.JwtService;
 import br.edu.ifsp.testing.class09.security.user.Role;
 import br.edu.ifsp.testing.class09.security.user.User;
-import br.edu.ifsp.testing.class09.security.user.UserRepository;
+import br.edu.ifsp.testing.class09.security.user.JpaUserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -16,12 +16,12 @@ import java.util.UUID;
 @Service
 @AllArgsConstructor
 public class AuthenticationService {
-    private final UserRepository userRepository;
+    private final JpaUserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
 
-    public RegisterResponse register(RegisterRequest request) {
+    public RegisterUserResponse register(RegisterUserRequest request) {
 
         userRepository.findByEmail(request.email()).ifPresent(unused -> {
             throw new EntityAlreadyExistsException("Email already registered: " + request.email());});
@@ -39,7 +39,7 @@ public class AuthenticationService {
                 .build();
 
         userRepository.save(user);
-        return new RegisterResponse(id);
+        return new RegisterUserResponse(id);
     }
 
     public AuthResponse authenticate(AuthRequest request) {

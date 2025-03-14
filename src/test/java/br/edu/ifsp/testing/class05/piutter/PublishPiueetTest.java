@@ -23,7 +23,7 @@ class PublishPiueetTest {
     void shouldReturnFalseIfServiceCanNotPublishAPiueetWithStub() {
         String msg = "In the middle of every difficulty lies opportunity. — Albert Einstein";
         when(piutterServiceMock.piueet(userUuid, msg)).thenReturn(false);
-        final boolean obtained = sut.send(userUuid, "Hello!");
+        final boolean obtained = sut.send(userUuid, msg);
         assertThat(obtained).isFalse();
     }
 

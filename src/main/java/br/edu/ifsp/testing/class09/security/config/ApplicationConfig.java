@@ -1,7 +1,6 @@
 package br.edu.ifsp.testing.class09.security.config;
 
-import br.edu.ifsp.testing.class09.security.user.UserRepository;
-import lombok.RequiredArgsConstructor;
+import br.edu.ifsp.testing.class09.security.user.JpaUserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -16,9 +15,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 public class ApplicationConfig {
 
-    private final UserRepository repository;
+    private final JpaUserRepository repository;
 
-    public ApplicationConfig(UserRepository repository) {
+    public ApplicationConfig(JpaUserRepository repository) {
         this.repository = repository;
     }
 

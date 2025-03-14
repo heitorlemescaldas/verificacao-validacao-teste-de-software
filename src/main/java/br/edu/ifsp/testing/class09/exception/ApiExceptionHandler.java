@@ -1,5 +1,7 @@
 package br.edu.ifsp.testing.class09.exception;
 
+import io.jsonwebtoken.ClaimJwtException;
+import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

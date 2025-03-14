@@ -8,6 +8,7 @@ public class SevenEleven {
     public SevenEleven(Die die) {
         this.die = die;
     }
+
     public int play() {
         int sum = die.roll() + die.roll();
 
