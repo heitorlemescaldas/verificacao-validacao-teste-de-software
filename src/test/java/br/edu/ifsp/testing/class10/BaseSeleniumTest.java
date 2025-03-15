@@ -11,12 +11,15 @@ public class BaseSeleniumTest {
     @BeforeEach
     public void setUp() {
         driver = new ChromeDriver();
+        setInitialPage();
     }
 
     @AfterEach
     public void tearDown() {
        driver.quit();
     }
+
+    protected void setInitialPage(){}
 
     protected void delay(int millis) {
         try{

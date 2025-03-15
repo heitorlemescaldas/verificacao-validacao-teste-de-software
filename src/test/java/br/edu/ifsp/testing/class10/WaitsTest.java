@@ -2,11 +2,15 @@ package br.edu.ifsp.testing.class10;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
@@ -25,24 +29,6 @@ public class WaitsTest {
     public void tearDown() {
         driver.quit();
     }
-
-//    @Test
-//    @DisplayName("Should page title starts with searched text using mouse")
-//    void shouldPageTitleStartsWithSearchedTextUsingMouse() {
-//        driver.get("https://bing.com");
-//
-//        delay(4000); // waits the page to be rendered
-//        driver.findElement(By.className("bnp_btn_accept")).click(); // closes cookie banner
-//
-//        driver.findElement(By.className("sb_form_q")).sendKeys("Selenium WebDriver");
-//        delay(5000); // waits the text to be typed in the browser
-//
-//        driver.findElement(By.className("sb_search_btn")).click();
-//        delay(1000); // waits the next page to be rendered
-//
-//        final String title = driver.getTitle(); // obtains the title of the page
-//        assertThat(title).startsWith("Selenium WebDriver");
-//    }
 
     @Test
     void shouldResultPageTitleStartWithTheTextBeingSearched() {
@@ -63,10 +49,27 @@ public class WaitsTest {
     }
 
     @Test
-    void shouldResultPageTitleStartWithTheTextBeingSearchedWithImplicit() {
+    void shouldResultPageTitleStartWithTheTextBeingSearchedWithExplicitWait() {
         driver.get("https://www.google.com");
         driver.findElement(By.className("gLFyf")).sendKeys("Selenium WebDriver");
-        driver.findElement(By.className("gNO89b")).click();
+        final WebElement button = new WebDriverWait(driver, Duration.ofSeconds(10)) // 10s timeout
+                .until(ExpectedConditions.elementToBeClickable(By.className("gNO89b"))); // define expected condition
+        button.click();
+        assertThat(driver.getTitle()).isNotEmpty();
+    }
+
+    @Test
+    void shouldResultPageTitleStartWithTheTextBeingSearchedWithFluentWait() {
+        driver.get("https://www.google.com");
+        driver.findElement(By.className("gLFyf")).sendKeys("Selenium WebDriver");
+        new FluentWait<>(driver)
+                .withTimeout(Duration.ofSeconds(10)) // max wait duration
+                .pollingEvery(Duration.ofMillis(700)) // verification frequency
+                .ignoring(NoSuchElementException.class) // ignore this exception
+                .until(ExpectedConditions.elementToBeClickable(By.className("gNO89b")))
+                .click();
         assertThat(driver.getTitle()).isNotEmpty();
     }
 }
+
+
