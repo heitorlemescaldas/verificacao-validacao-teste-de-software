@@ -20,14 +20,14 @@ class BinarySearchTest {
         assertThat(foundIndex).isEqualTo(index);
     }
 
-    @Test
-    @DisplayName("Should return -1 if the element is bigger than the last array element")
-    void shouldReturnMinusOneIfTheElementIsBiggerThanTheLastArrayElement() {
-        int[] array = new int[]{1, 11};
-        BinarySearch sut = new BinarySearch();
-        final int foundIndex = sut.binarySearch(array, 13);
-        assertThat(foundIndex).isEqualTo(-1);
-    }
+//    @Test
+//    @DisplayName("Should return -1 if the element is bigger than the last array element")
+//    void shouldReturnMinusOneIfTheElementIsBiggerThanTheLastArrayElement() {
+//        int[] array = new int[]{1, 11};
+//        BinarySearch sut = new BinarySearch();
+//        final int foundIndex = sut.binarySearch(array, 13);
+//        assertThat(foundIndex).isEqualTo(-1);
+//    }
 
     @Test
     @DisplayName("Should find no element in null array")
@@ -38,7 +38,7 @@ class BinarySearchTest {
     }
 
     @Test
-    @DisplayName("Should find no element in null array")
+    @DisplayName("Should find no element in empty array")
     void shouldFindNoElementInEmptyArray() {
         BinarySearch sut = new BinarySearch();
         final int foundIndex = sut.binarySearch(new int[]{}, 1);

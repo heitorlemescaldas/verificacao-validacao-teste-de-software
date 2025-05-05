@@ -162,11 +162,16 @@
                 </dependencies>
                 <configuration>
                     <targetClasses>
-                        <param>br.edu.ifsp.testing.class08.BinarySearch*</param>
+                        <param>br.edu.ifsp.testing.class08*</param>
+                        <param>br.edu.ifsp.testing.practice*</param>
                     </targetClasses>
                     <targetTests>
-                        <param>br.edu.ifsp.testing.class08.BinarySearch*</param>
+                        <param>br.edu.ifsp.testing.class08*</param>
+                        <param>br.edu.ifsp.testing.practice*</param>
                     </targetTests>
+                    <mutators>
+                        <mutator>ALL</mutator>
+                    </mutators>
                 </configuration>
             </plugin>
             <plugin>
