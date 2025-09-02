@@ -1,5 +1,6 @@
 package br.edu.ifsp.testing.class04;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -11,32 +12,45 @@ public class SummingInts {
         if (left == null || right == null)
             return null;
 
-        // Reverses the numbers so the least significant digit is on the left
-        Collections.reverse(left);
-        Collections.reverse(right);
+        // Cópias mutáveis para evitar UnsupportedOperationException e preservar entradas
+        List<Integer> l = new ArrayList<>(left);
+        List<Integer> r = new ArrayList<>(right);
+
+        // Listas vazias representam 0
+        if (l.isEmpty()) l.add(0);
+        if (r.isEmpty()) r.add(0);
+
+        // Validação de dígitos 0..9
+        if (!l.stream().allMatch(d -> d >= 0 && d <= 9) || !r.stream().allMatch(d -> d >= 0 && d <= 9)) {
+            throw new IllegalArgumentException("Digits must be between 0 and 9");
+        }
+
+        // Inverter para somar do dígito menos significativo
+        Collections.reverse(l);
+        Collections.reverse(r);
 
         LinkedList<Integer> result = new LinkedList<>();
         int carry = 0;
 
-        // While there is a digit, keeps summing, taking carries into consideration
-        for (int i = 0; i < max(left.size(), right.size()); i++) {
-            int leftDigit = left.size() > i ? left.get(i) : 0;
-            int rightDigit = right.size() > i ? right.get(i) : 0;
+        for (int i = 0; i < max(l.size(), r.size()); i++) {
+            int dl = i < l.size() ? l.get(i) : 0;
+            int dr = i < r.size() ? r.get(i) : 0;
 
-            // Throws an exception if the pre-condition does not hold
-            if (leftDigit < 0 || leftDigit > 9 || rightDigit < 0 || rightDigit > 9)
-                throw new IllegalArgumentException();
-
-            // Sums the left digit with the right digit with the possible carry
-            int sum = leftDigit + rightDigit + carry;
-
-            // The digit should be a number between 0 and 9.
-            // We calculate it by taking the rest of the division (the % operator) of the sum by 10.
-            result.addFirst(sum % 10);
-
-            // If the sum is greater than 10, carries the rest of the division to the next digit
+            int sum = dl + dr + carry;
+            result.addLast(sum % 10); // construindo de LSD -> MSD
             carry = sum / 10;
         }
+
+        if (carry > 0) {
+            result.addLast(carry);
+        }
+
+        Collections.reverse(result);
+
+        while (result.size() > 1 && result.get(0) == 0) {
+            result.remove(0);
+        }
+
         return result;
     }
 }
