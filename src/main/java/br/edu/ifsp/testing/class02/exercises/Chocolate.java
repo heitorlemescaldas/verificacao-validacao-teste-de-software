@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class Chocolate {
     public int calculateTotalOfChocolates(double n, double c, int m){
+        if (n < 0 | c < 0 | m < 0) throw new IllegalArgumentException("Todos os valores devem ser maior ou igual a zero");
         if (c > n){
             return 0;
         } else if (c == n) {
