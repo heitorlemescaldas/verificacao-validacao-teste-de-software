@@ -1,11 +1,14 @@
 package br.edu.ifsp.testing.class04;
 
 import br.edu.ifsp.testing.class02.Identifier;
+import org.junit.jupiter.api.RepeatedTest;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.provider.Arguments;
 
 import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import static org.assertj.core.api.Assertions.*;
@@ -34,5 +37,18 @@ public class IdentifierTestParameterized {
     @MethodSource("providedCases")
     void shouldTestIdentifier(String input, boolean expected) {
         assertThat(Identifier.isValid(input)).isEqualTo(expected);
+    }
+
+    @DisplayName("CsvSource Identifier Test")
+    @CsvSource({"a,true", "A1,true", "abc123,true", "abcdefg,false", "1abc,false"})
+    @ParameterizedTest
+    void shouldInputCsvSourceAtIdentifierTest (String input, boolean expected) {
+        assertThat(Identifier.isValid(input)).isEqualTo(expected);
+    }
+
+    @DisplayName("Repeated Test Identifier Test")
+    @RepeatedTest(value = 3, name = "{displayName}: {currentRepetition} of {totalRepetitions}")
+    void shouldRepeatIdentifierTest () {
+        assertThat(Identifier.isValid("a")).isEqualTo(true);
     }
 }
